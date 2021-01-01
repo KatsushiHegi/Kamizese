@@ -1,18 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Item : MonoBehaviour
+﻿public class Item
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string name;  //名前
+    public string description;  //説明
+    public float price;  //値段
+    public float attractiveness;  //魅力
+    public Prefecture targetPrefecture; //対象都道府県
 }
