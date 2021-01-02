@@ -15,12 +15,5 @@ public class Manager : MonoBehaviour
 
         yield break;
     }
-    IEnumerator StartTurnThread()
-    {
-        yield return AnimationManager.PlayFadeIn();
-    }
-    IEnumerator EndTrunThread()
-    {
-        yield return AnimationManager.PlayFadeOut();
-    }
+    
 }
