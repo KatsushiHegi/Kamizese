@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
+    public AnimationManager AnimationManager;
     private void Awake()
     {
         new CSVReader().Init();
@@ -13,5 +14,13 @@ public class Manager : MonoBehaviour
 
 
         yield break;
+    }
+    IEnumerator StartTurnThread()
+    {
+        yield return AnimationManager.PlayFadeIn();
+    }
+    IEnumerator EndTrunThread()
+    {
+        yield return AnimationManager.PlayFadeOut();
     }
 }
