@@ -10,11 +10,13 @@ public class AnimationManager : MonoBehaviour
         FadeAnim.gameObject.SetActive(true);
         FadeAnim.Play("FadeIn");
         yield return new WaitForSeconds(.5f);
+        FadeAnim.gameObject.SetActive(false);
     }
     public IEnumerator PlayFadeOut()
     {
         FadeAnim.gameObject.SetActive(true);
         FadeAnim.Play("FadeOut");
         yield return new WaitForSeconds(.5f);
+        FadeAnim.gameObject.SetActive(false);
     }
 }

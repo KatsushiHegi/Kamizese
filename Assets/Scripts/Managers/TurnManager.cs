@@ -5,6 +5,11 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] AnimationManager AnimationManager;
+    private void Start()
+    {
+        StartCoroutine(StartTurnThread());
+    }
+    public void EndTurn() => StartCoroutine(EndTrunThread());
     IEnumerator StartTurnThread()
     {
         yield return AnimationManager.PlayFadeIn();
