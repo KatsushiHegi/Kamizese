@@ -6,6 +6,5 @@ public class Manager : MonoBehaviour
 {    
     private void Awake()
     {
-        new CSVReader().Init();
     }
 }
