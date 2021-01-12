@@ -6,10 +6,9 @@ using UnityEngine.UI;
 public class PrefectureController : MonoBehaviour
 {
     [SerializeField] ItemPrefectureManager ItemPrefectureManager;
-    public Prefecture prefecture { get; private set; }
+    public Prefecture prefecture { get; private set; } = new Prefecture();
     private void Start()
     {
-        prefecture = new Prefecture();
         GetComponent<Button>().onClick.AddListener(() => {
             ItemPrefectureManager.PrefectureClick(prefecture);
         });

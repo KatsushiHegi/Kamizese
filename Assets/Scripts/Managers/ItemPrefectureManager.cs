@@ -11,6 +11,7 @@ public class ItemPrefectureManager : MonoBehaviour
     {
         pickUpItem = item;
         playerState = PlayerState.Item;
+        DebugLog();
     }
     public void PrefectureClick(Prefecture prefecture)
     {
@@ -19,11 +20,13 @@ public class ItemPrefectureManager : MonoBehaviour
             prefecture.itemList.Add(pickUpItem);
             pickUpItem = null;
             playerState = PlayerState.None;
+            DebugLog();
         }
         else if(playerState == PlayerState.None)
         {
             pickUpPrefecture = prefecture;
             playerState = PlayerState.Prefecture;
+            DebugLog();
         }
     }
     public void ItemCancelClick()
@@ -32,6 +35,7 @@ public class ItemPrefectureManager : MonoBehaviour
         {
             pickUpItem = null;
             playerState = PlayerState.None;
+            DebugLog();
         }
     }
     public void PrefectureCancelClick()
@@ -39,7 +43,13 @@ public class ItemPrefectureManager : MonoBehaviour
         if (playerState == PlayerState.Prefecture)
         {
             pickUpPrefecture.itemList.Clear();
+            playerState = PlayerState.None;
+            DebugLog();
         }
+    }
+    void DebugLog()
+    {
+        Debug.Log(playerState);
     }
 }
 
