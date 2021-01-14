@@ -7,26 +7,23 @@ public class Shop : MonoBehaviour
     [SerializeField] PrefectureManager PrefectureManager;
     [SerializeField] GameObject itemPref;
     [SerializeField] Transform parent;
-    CSVReader CSVReader;
-    private void Awake()
-    {
-        CSVReader = new CSVReader();
-        CSVReader.Init();
-    }
+    
     private void Start()
     {
         SetShop();
     }
     public void SetShop()
     {
-        for (int i = 0; i < CSVReader.csvData.Count; i++)
+        CSVReader CSVReader = new CSVReader();
+        CSVReader.SetItemInfo();
+        for (int i = 0; i < CSVReader.itemCsvData.Count; i++)
         {
             var ins = Instantiate(itemPref, parent);
             
             ins.GetComponent<ItemController>().SetItem(
-                PrefectureManager.GetPrefecture(int.Parse(CSVReader.csvData[i][0])),
-                CSVReader.csvData[i][1],
-                CSVReader.csvData[i][2]
+                PrefectureManager.GetPrefecture(int.Parse(CSVReader.itemCsvData[i][0])),
+                CSVReader.itemCsvData[i][1],
+                CSVReader.itemCsvData[i][2]
                 );
             
         }

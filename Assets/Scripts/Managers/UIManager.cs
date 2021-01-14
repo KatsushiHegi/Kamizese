@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Text TurnValueText;
     [SerializeField] Text MoneyValueText;
+
     private void Start()
     {
 

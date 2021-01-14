@@ -5,25 +5,26 @@ using UnityEngine;
 
 public class CSVReader
 {
-    public List<string[]> csvData { get; private set; } = new List<string[]>();
-    public void Init()
+    public List<string[]> itemCsvData { get; private set; } = new List<string[]>();
+    public List<string[]> prefectureCsvData { get; private set; } = new List<string[]>();
+    public void SetItemInfo()
     {
-        var csvFile = Resources.Load("ItemInfo") as TextAsset;
+        Load("ItemInfo", itemCsvData);
+    }
+    public void SetPrefectureInfo()
+    {
+        Load("PrefectureInfo", prefectureCsvData);
+    }
+    void Load(string fileName,List<string[]> list)
+    {
+        var csvFile = Resources.Load(fileName) as TextAsset;
         using (var sr = new StringReader(csvFile.text))
         {
             while (sr.Peek() > -1)
             {
                 var line = sr.ReadLine();
-                csvData.Add(line.Split(','));
+                list.Add(line.Split(','));
             }
         }
-        /*Debug*/
-        csvData.ForEach(x =>
-        {
-            foreach (var item in x)
-            {
-                Debug.Log(item);
-            }
-        });
     }
 }
