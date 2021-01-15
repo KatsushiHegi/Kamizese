@@ -20,11 +20,13 @@ public class Shop : MonoBehaviour
         {
             var ins = Instantiate(itemPref, parent);
             
-            ins.GetComponent<ItemController>().SetItem(
+            ins.GetComponent<ItemController>().item.Set(
                 PrefectureManager.GetPrefecture(int.Parse(CSVReader.itemCsvData[i][0])),
                 CSVReader.itemCsvData[i][1],
-                CSVReader.itemCsvData[i][2]
+                CSVReader.itemCsvData[i][2],
+                Random.Range(1,5)
                 );
+
             
         }
     }
