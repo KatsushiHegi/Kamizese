@@ -7,6 +7,7 @@ public class SwichingDispManager : MonoBehaviour
 {
     [SerializeField] GameObject NihonDisp;
     [SerializeField] GameObject EnlargedDisp;
+    [SerializeField] GameObject Header;
     [SerializeField] Button[] Buttons = new Button[8];
     [SerializeField] GameObject[] RegionDisps = new GameObject[8];
     [SerializeField] ConfirmPopUpManager ConfirmPopUpManager;
@@ -24,6 +25,8 @@ public class SwichingDispManager : MonoBehaviour
     }
     public void ToNihonDisp()
     {
+        Header.SetActive(false);
+        Header.SetActive(true);
         currentDisp.SetActive(false);
         EnlargedDisp.SetActive(false);
         NihonDisp.SetActive(true);
@@ -31,6 +34,8 @@ public class SwichingDispManager : MonoBehaviour
     }
     void ToArea(GameObject areaDisp)
     {
+        Header.SetActive(false);
+        Header.SetActive(true);
         NihonDisp.SetActive(false);
         EnlargedDisp.SetActive(true);
         areaDisp.SetActive(true);
