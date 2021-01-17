@@ -11,6 +11,7 @@ public class SwichingDispManager : MonoBehaviour
     [SerializeField] Button[] Buttons = new Button[8];
     [SerializeField] GameObject[] RegionDisps = new GameObject[8];
     [SerializeField] ConfirmPopUpManager ConfirmPopUpManager;
+    [SerializeField] MoneyManager MoneyManager;
     GameObject currentDisp;
     private void Start()
     {
@@ -31,6 +32,7 @@ public class SwichingDispManager : MonoBehaviour
         EnlargedDisp.SetActive(false);
         NihonDisp.SetActive(true);
         ConfirmPopUpManager.Set();
+        MoneyManager.SetCostBalanceText();
     }
     void ToArea(GameObject areaDisp)
     {

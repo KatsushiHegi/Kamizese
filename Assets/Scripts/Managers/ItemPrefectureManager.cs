@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemPrefectureManager : MonoBehaviour
 {
+    [SerializeField] SelectItemDispController SelectItemDispController;
     public PlayerState playerState { get; private set; } = PlayerState.None;
     Item pickUpItem;
     Prefecture pickUpPrefecture;
@@ -11,6 +12,8 @@ public class ItemPrefectureManager : MonoBehaviour
     {
         pickUpItem = item;
         playerState = PlayerState.Item;
+        SelectItemDispController.gameObject.SetActive(true);
+        SelectItemDispController.Set(pickUpItem);
         DebugLog();
     }
     public void PrefectureClick(Prefecture prefecture)
@@ -20,6 +23,7 @@ public class ItemPrefectureManager : MonoBehaviour
             prefecture.itemList.Add(pickUpItem);
             pickUpItem = null;
             playerState = PlayerState.None;
+            SelectItemDispController.gameObject.SetActive(false);
             DebugLog();
         }
         else if(playerState == PlayerState.None)
@@ -35,6 +39,7 @@ public class ItemPrefectureManager : MonoBehaviour
         {
             pickUpItem = null;
             playerState = PlayerState.None;
+            SelectItemDispController.gameObject.SetActive(false);
             DebugLog();
         }
     }

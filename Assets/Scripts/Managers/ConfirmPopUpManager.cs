@@ -12,6 +12,10 @@ public class ConfirmPopUpManager : MonoBehaviour
     [SerializeField] PrefectureManager PrefectureManager;
     public void Set()
     {
+        foreach (Transform child in Parent)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (PrefectureController p in PrefectureManager.prefectureControllers)
         {
             foreach (Item item in p.prefecture.itemList)
@@ -22,9 +26,8 @@ public class ConfirmPopUpManager : MonoBehaviour
                     item.targetPrefecture.prefectureName,
                     new Calc().CalcProbability(item.attractiveness, Vector2.Distance(p.prefecture.coordinate, item.targetPrefecture.coordinate))
                     );
-                Debug.Log(Math.Log(Vector2.Distance(p.prefecture.coordinate, item.targetPrefecture.coordinate), 2));
-                Debug.Log(Math.Log(580, 2));
             }
         }
     }
+
 }
