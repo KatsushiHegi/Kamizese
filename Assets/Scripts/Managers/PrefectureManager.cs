@@ -5,7 +5,7 @@ using UnityEngine;
 public class PrefectureManager : MonoBehaviour
 {
     public PrefectureController[] prefectureControllers = new PrefectureController[47];
-    private void Start()
+    private void Awake()
     {
         Allocation();
 
