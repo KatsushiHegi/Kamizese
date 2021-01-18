@@ -19,6 +19,7 @@ public class TurnManager : MonoBehaviour
     }
     IEnumerator StartTurnThread()
     {
+        if (turn == 20) StartCoroutine(ResultThread());
         SetText();
         MoneyManager.SetMoneyText();
         yield return AnimationManager.PlayFadeIn();
@@ -33,5 +34,10 @@ public class TurnManager : MonoBehaviour
         yield return AnimationManager.PlayFadeOut();
         turn++;
         StartCoroutine(StartTurnThread());
+    }
+    IEnumerator ResultThread()
+    {
+        Debug.Log("20");
+        yield break;
     }
 }

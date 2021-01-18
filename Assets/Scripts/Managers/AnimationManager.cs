@@ -80,7 +80,7 @@ public class AnimationManager : MonoBehaviour
     {
         Animator animator = Human.GetComponent<Animator>();
         AudioSource audioSource = Human.GetComponent<AudioSource>();
-        if (State = true){
+        if (State == true){
             animator.SetBool("open",true);
         }
         else{

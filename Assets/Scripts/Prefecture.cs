@@ -8,10 +8,11 @@ public class Prefecture
     public int population;
     public Vector2 coordinate;
     public List<Item> itemList = new List<Item>();
-    public void SetPrefecture(int prefectureId, string prefectureName, Vector2 coordinate)
+    public void SetPrefecture(int prefectureId, string prefectureName, Vector2 coordinate, int population)
     {
         this.prefectureId = prefectureId;
         this.prefectureName = prefectureName;
         this.coordinate = coordinate;
+        this.population = population;
     }
 }
