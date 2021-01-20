@@ -5,6 +5,8 @@ using UnityEngine;
 public class PrefectureManager : MonoBehaviour
 {
     public PrefectureController[] prefectureControllers = new PrefectureController[47];
+    [SerializeField] MoneyManager MoneyManager;
+    [SerializeField] TurnRusultManager TurnRusultManager;
     private void Awake()
     {
         Allocation();
@@ -22,15 +24,31 @@ public class PrefectureManager : MonoBehaviour
                     new Vector2(float.Parse(cSVReader.prefectureCsvData[i][2]), float.Parse(cSVReader.prefectureCsvData[i][3])),
                     new Calc().ProbabilityToPopulation(float.Parse(cSVReader.prefectureCsvData[i][4]))
                     );
-                a += prefectureControllers[i].prefecture.population;
-                Debug.Log(prefectureControllers[i].prefecture.population);
             }
-            Debug.Log(a);
         }
     }
-
     public Prefecture GetPrefecture(int prefectureId)
     {
         return prefectureControllers[prefectureId].prefecture;
     }
+    public void UseItems()
+    {
+        foreach (PrefectureController ps in prefectureControllers)
+        {
+            foreach (Item i in ps.prefecture.itemList )
+            {
+                int people = ps.prefecture.UseItem(i);
+                int money = MoneyManager.GetRewarded(people, Vector2.Distance(ps.prefecture.coordinate, i.targetPrefecture.coordinate));
+                TurnRusultManager.dispDataList.Add(
+                    new DispData()
+                    {
+                        prefectureName = ps.prefecture.prefectureName,
+                        targetPrefectureName = i.targetPrefecture.prefectureName,
+                        peopleToMove = people,
+                        reward = money
+                    }) ;
+            }
+        }
+    }
+
 }

@@ -13,8 +13,6 @@ public class Calc
     public int ProbabilityToPopulation(float probability)
     {
         const int JAPAN_POPULATION = 126500;
-
-
         return (int)(JAPAN_POPULATION * probability);
     }
 

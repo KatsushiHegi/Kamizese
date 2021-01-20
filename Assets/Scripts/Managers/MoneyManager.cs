@@ -15,7 +15,7 @@ public class MoneyManager : MonoBehaviour
 
     public void SetMoneyText()
     {
-        MoneyText.text = money.ToString();
+        MoneyText.text = money.ToString("N0");
         SetCostBalanceText();
     }
     public void SetCostBalanceText()
@@ -39,11 +39,18 @@ public class MoneyManager : MonoBehaviour
         }
         cost = sum;
     }
-    
     public bool Liquidation()
     {
         if (cost > money) return false;
         money -= cost;
         return true;
+    }
+    public int GetRewarded(int people, float distance)
+    {
+        double standard = people * 0.1;
+        double multiply = distance - 1.5;
+        int reward = (int)(standard * multiply);
+        money += reward;
+        return reward;
     }
 }
