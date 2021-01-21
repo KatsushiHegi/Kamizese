@@ -7,88 +7,113 @@ public class PopulationDisplayManager : MonoBehaviour
 {
     [SerializeField] PrefectureManager PrefectureManager;
     [SerializeField] Button SortButton;
-    [SerializeField] Text PopulationText;
+    [SerializeField] GameObject PopulationDisplayElementPref;
+    [SerializeField] Transform Parent;
 
-    int[] popu = new int[47];
-    string[] pref = new string[47];
-    bool sortFlag = true;
-    string str;
+    Prefecture[] prefectures = new Prefecture[47];
+    Prefecture[] sortedPrefectures = new Prefecture[47];
+    private Status status;
+
+    private enum Status{
+        Normal,
+        Sort,
+    }
     
     private void Start(){
-        SortButton.onClick.AddListener(() => Sort());
-
-        str = null;
-        for(int a = 0 ; a < 47 ; a++){
-            popu[a] = PrefectureManager.prefectureControllers[a].prefecture.population;
-            pref[a] = PrefectureManager.prefectureControllers[a].prefecture.prefectureName;
-            str += (pref[a] + " : " + popu[a] + "\n");
-        }
-        PopulationText.text = str;
+        SortButton.onClick.AddListener(() => Change());
     }
 
-    private void Sort(){
-        str = null;
-        for(int a = 0 ; a < 47 ; a++){
-            popu[a] = PrefectureManager.prefectureControllers[a].prefecture.population;
-            pref[a] = PrefectureManager.prefectureControllers[a].prefecture.prefectureName;
+    public void UpdatePopulation(){
+        for(int i = 0 ; i < PrefectureManager.prefectureControllers.Length ; i++){
+            prefectures[i] = PrefectureManager.prefectureControllers[i].prefecture;
+            sortedPrefectures[i] = prefectures[i];
         }
-        if (sortFlag == true){
-            QuickSort(pref, popu, 0, 46);
-            for(int a = 46 ; a >= 0 ; a--){
-                str += (pref[a] + " : " + popu[a] + "\n");
-            }
-            PopulationText.text = str;   
-            sortFlag = false;
+        QuickSort(sortedPrefectures, 0, sortedPrefectures.Length-1);
+        Disp(prefectures);
+    }
+
+    private void Disp(Prefecture[] prefectures){
+        Color[] ruralColors = new Color[8]{
+            new Color(105.0f/255.0f,124.0f/255.0f,156.0f/255.0f),
+            new Color(99.0f/255.0f,164.0f/255.0f,198.0f/255.0f),
+            new Color(123.0f/255.0f,187.0f/255.0f,107.0f/255.0f),
+            new Color(206.0f/255.0f,174.0f/255.0f,204.0f/255.0f),
+            new Color(223.0f/255.0f,156.0f/255.0f,34.0f/255.0f),
+            new Color(181.0f/255.0f,131.0f/255.0f,80.0f/255.0f),
+            new Color(171.0f/255.0f,90.0f/255.0f,139.0f/255.0f),
+            new Color(244.0f/255.0f,151.0f/255.0f,89.0f/255.0f),
+        };
+        foreach(Transform child in Parent){
+            Destroy(child.gameObject);
+        }
+        for(int i = 0 ; i < prefectures.Length ; i++){
+            var ins = Instantiate(PopulationDisplayElementPref,Parent);
+            var pdec = ins.GetComponent<PopulationDisplayElementController>();
+
+            Debug.Log(ruralColors[prefectures[i].ruralId]);
+
+            pdec.SetPrefectureText(
+                prefectures[i].prefectureName, 
+                ruralColors[prefectures[i].ruralId]
+                );
+            pdec.SetPopulationText(
+                prefectures[i].population, 
+                prefectures[i].population < 265? new Color(30.0f/255.0f,71.0f/255.0f,136.0f/255.0f) : 
+                prefectures[i].population > 5035? new Color(244.0f/255.0f,88.0f/255.0f,88.0f/255.0f) : 
+                new Color(0,0,0)
+            );
+        }
+    }
+    
+    private void Change(){
+        if(status == Status.Normal){
+            Disp(sortedPrefectures);
+            status = Status.Sort;
         }
         else{
-            for(int a = 0 ; a < 47 ; a++){
-                str += (PrefectureManager.prefectureControllers[a].prefecture.prefectureName + " : " + PrefectureManager.prefectureControllers[a].prefecture.population + "\n");
-            }
-            PopulationText.text = str;
-            sortFlag = true;
+            Disp(prefectures);
+            status = Status.Normal;
         }
     }
 
-    private void QuickSort(string[] pref, int[] array, int left, int right){
+    //クイックソート
+    private void QuickSort(Prefecture[] prefectures, int left, int right){
 
         if(left >= right) return;
 
-        int pivot = Median(array[left], array[(left + right)/2], array[right]);
+        Prefecture pivot = Median(
+            prefectures[left], 
+            prefectures[(left + right)/2], 
+            prefectures[right]
+        );
 
         int i = left;
         int j = right;
 
         while(i <= j){
-            while(i < right && array[i].CompareTo(pivot) < 0) i++;
-            while(j > left && array[j].CompareTo(pivot) >= 0) j--;
+            while(i < right && prefectures[i].population.CompareTo(pivot.population) > 0) i++;
+            while(j > left && prefectures[j].population.CompareTo(pivot.population) <= 0) j--;
 
             if(i > j) break;
-            Swap(ref array[i], ref array[j]);
-            SwapStr(ref pref[i], ref pref[j]);
+            Swap(ref prefectures[i], ref prefectures[j]);
 
             i++;
             j--;
         }
 
-        QuickSort(pref, array, left, i - 1);
-        QuickSort(pref, array, i, right);
+        QuickSort(prefectures, left, i - 1);
+        QuickSort(prefectures, i, right);
     }
 
-    private int Median(int x, int y, int z){
-        if(x.CompareTo(y) > 0) Swap(ref x, ref y);
-        if(x.CompareTo(z) > 0) Swap(ref x, ref z);
-        if(y.CompareTo(z) > 0) Swap(ref x, ref z);
+    private Prefecture Median(Prefecture x, Prefecture y, Prefecture z){
+        if(x.population.CompareTo(y.population) > 0) Swap(ref x, ref y);
+        if(x.population.CompareTo(z.population) > 0) Swap(ref x, ref z);
+        if(y.population.CompareTo(z.population) > 0) Swap(ref x, ref z);
         return y;
     }
 
-    private void Swap(ref int x, ref int y){
+    private void Swap(ref Prefecture x, ref Prefecture y){
         var tmp = x;
-        x = y;
-        y = tmp;
-    }
-
-    private void SwapStr(ref string x, ref string y){
-        string tmp = x;
         x = y;
         y = tmp;
     }

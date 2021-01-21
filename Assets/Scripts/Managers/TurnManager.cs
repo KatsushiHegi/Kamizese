@@ -13,6 +13,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] PopUpManager PopUpManager;
     [SerializeField] TurnRusultManager TurnRusultManager;
     [SerializeField] ResultManager ResultManager;
+    [SerializeField] PopulationDisplayManager PopulationDisplayManager;
     private void Start() => StartCoroutine(StartTurnThread());
     public void EndTurn() => StartCoroutine(EndTrunThread());
     public void SetText()
@@ -31,6 +32,7 @@ public class TurnManager : MonoBehaviour
             PopUpManager.ActiveTurnResultPop();
             TurnRusultManager.Set();
         }
+        PopulationDisplayManager.UpdatePopulation();
         SetText();
         MoneyManager.SetMoneyText();
         yield return AnimationManager.PlayFadeIn();

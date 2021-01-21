@@ -4,14 +4,16 @@ using UnityEngine;
 public class Prefecture
 {
     public int prefectureId;
+    public int ruralId;
     public string prefectureName;
     public int population;
     public int peopleToMove;
     public Vector2 coordinate;
     public List<Item> itemList = new List<Item>();
-    public void SetPrefecture(int prefectureId, string prefectureName, Vector2 coordinate, int population)
+    public void SetPrefecture(int prefectureId, int ruralId, string prefectureName, Vector2 coordinate, int population)
     {
         this.prefectureId = prefectureId;
+        this.ruralId = ruralId;
         this.prefectureName = prefectureName;
         this.coordinate = coordinate;
         this.population = population;
