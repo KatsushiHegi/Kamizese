@@ -19,15 +19,7 @@ public class TurnManager : MonoBehaviour
     {
         TurnText.text = turn.ToString();
     }
-    public void SkipButtonClick() => StartCoroutine(Skip());
-    IEnumerator Skip()
-    {
-        yield return AnimationManager.PlayFadeOut();
-        turn = 20;
-        SetText();
-        turn = 21;
-        StartCoroutine(StartTurnThread());
-    }
+
     IEnumerator StartTurnThread()
     {
         if (turn == 21) { 
@@ -55,9 +47,13 @@ public class TurnManager : MonoBehaviour
         turn++;
         StartCoroutine(StartTurnThread());
     }
-    IEnumerator ResultThread()
+    public void SkipButtonClick() => StartCoroutine(Skip());
+    IEnumerator Skip()
     {
-        Debug.Log("Rusult");
-        yield return AnimationManager.PlayFadeIn();
+        yield return AnimationManager.PlayFadeOut();
+        turn = 20;
+        SetText();
+        turn = 21;
+        StartCoroutine(StartTurnThread());
     }
 }

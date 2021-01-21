@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PrefectureManager : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class PrefectureManager : MonoBehaviour
 
         void Allocation()
         {
-            int a = 0;
             CSVReader cSVReader = new CSVReader();
             cSVReader.SetPrefectureInfo();
             for (int i = 0; i < prefectureControllers.Length; i++)

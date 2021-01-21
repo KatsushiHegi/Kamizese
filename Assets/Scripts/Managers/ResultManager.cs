@@ -68,6 +68,5 @@ public class ResultManager : MonoBehaviour
         Debug.Log("score" + score);
         this.score = score;
         return score;
-
     }
 }

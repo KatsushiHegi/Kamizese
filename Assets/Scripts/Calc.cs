@@ -1,12 +1,12 @@
 ﻿using System;
 public class Calc 
 {
-    public double CalcProbability(int attractiveness, float distance)
+    public double CalcProbability(int attractiveness, double distance)
     {
-        const float maxDistance = 580;
-        const float weight = 0.25f;
+        const double maxDistance = 580;
+        const double weight = 0.25;
         double a  = 0.15 * attractiveness - 0.45;
-        double d = 1 - (Math.Log(distance, 2) / Math.Log(maxDistance, 2) + weight * (1 - distance / maxDistance));
+        double d = 1 - (Math.Log10(distance) / Math.Log10(maxDistance)) + weight * (1.0 - distance / maxDistance);
 
         return (d + a) < 0 ? 0 : (d + a) > 1 ? 1 : (d + a);
     }
