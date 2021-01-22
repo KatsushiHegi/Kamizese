@@ -14,6 +14,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] TurnRusultManager TurnRusultManager;
     [SerializeField] ResultManager ResultManager;
     [SerializeField] PopulationDisplayManager PopulationDisplayManager;
+    [SerializeField] ConfirmPopUpManager ConfirmPopUpManager;
+    [SerializeField] HumanMoveManager HumanMoveManager;
     private void Start() => StartCoroutine(StartTurnThread());
     public void EndTurn() => StartCoroutine(EndTrunThread());
     public void SetText()
@@ -33,6 +35,7 @@ public class TurnManager : MonoBehaviour
             TurnRusultManager.Set();
         }
         PopulationDisplayManager.UpdatePopulation();
+        ConfirmPopUpManager.Set();
         SetText();
         MoneyManager.SetMoneyText();
         yield return AnimationManager.PlayFadeIn();
@@ -45,6 +48,7 @@ public class TurnManager : MonoBehaviour
             yield break;
         }
         PrefectureManager.UseItems();
+        yield return HumanMoveManager.HumanMove();
         yield return AnimationManager.PlayFadeOut();
         turn++;
         StartCoroutine(StartTurnThread());

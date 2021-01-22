@@ -50,7 +50,7 @@ public class PopulationDisplayManager : MonoBehaviour
             var ins = Instantiate(PopulationDisplayElementPref,Parent);
             var pdec = ins.GetComponent<PopulationDisplayElementController>();
 
-            Debug.Log(ruralColors[prefectures[i].ruralId]);
+
 
             pdec.SetPrefectureText(
                 prefectures[i].prefectureName, 

@@ -19,6 +19,7 @@ public class TurnRusultManager : MonoBehaviour
             var i = Instantiate(TurnResultElementPref, parent);
             i.GetComponent<TurnResultElementController>().Set(dd.prefectureName, dd.targetPrefectureName, dd.peopleToMove, dd.reward);
         }
+        dispDataList.Clear();
     }
 }
 public struct DispData

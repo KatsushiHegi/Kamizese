@@ -8,6 +8,7 @@ public class PrefectureManager : MonoBehaviour
     public PrefectureController[] prefectureControllers = new PrefectureController[47];
     [SerializeField] MoneyManager MoneyManager;
     [SerializeField] TurnRusultManager TurnRusultManager;
+    [SerializeField] HumanMoveManager HumanMoveManager;
     private void Awake()
     {
         Allocation();
@@ -48,7 +49,15 @@ public class PrefectureManager : MonoBehaviour
                         peopleToMove = people,
                         reward = money
                     }) ;
+                HumanMoveManager.moveDataList.Add(
+                    new MoveData()
+                    {
+                        sourceCoordinate = ps.prefecture.coordinate,
+                        targetCoordinate = i.targetPrefecture.coordinate,
+                        population = people,
+                    });
             }
+            ps.prefecture.itemList.Clear();
         }
     }
 

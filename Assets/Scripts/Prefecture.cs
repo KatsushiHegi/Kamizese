@@ -26,6 +26,8 @@ public class Prefecture
         {
             sum += Random.value <= prob ? 1 : 0;
         }
+        item.targetPrefecture.population += sum;
+        population -= sum;
         return sum;
     }
 }
