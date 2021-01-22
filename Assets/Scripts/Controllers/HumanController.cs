@@ -5,28 +5,32 @@ using UnityEngine;
 
 public class HumanController : MonoBehaviour
 {
-    public void Move(Vector2 coordinate, Vector2 targetCoordinate, Action callback)
+    public void Move(Vector2 coordinate,Vector2 targetCoordinate, Action callback)
     {
         Set();
         StartCoroutine(Move());
 
         void Set()
         {
+            coordinate.x += UnityEngine.Random.Range(-20, 20);
+            coordinate.y += UnityEngine.Random.Range(-20, 20);
+            targetCoordinate.x += UnityEngine.Random.Range(-20, 20);
+            targetCoordinate.y += UnityEngine.Random.Range(-20, 20);
             transform.rotation = targetCoordinate.x < coordinate.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-            transform.position = coordinate;
+            transform.localPosition = coordinate;
         }
-
+        
         IEnumerator Move()
         {
-            float speed = UnityEngine.Random.Range(0.7f, 1.2f);
-            var startTime = Time.time;
+            float startTime = Time.time;
+            float speed = UnityEngine.Random.Range(30, 50);
             var distance = Vector2.Distance(coordinate, targetCoordinate);
-            while (Vector2.Distance(transform.position, targetCoordinate) > 0.01)
+            while (Vector2.Distance(transform.localPosition, targetCoordinate) > 0.01)
             {
-                transform.position = Vector2.Lerp(
+                transform.localPosition = Vector2.Lerp(
                     coordinate,
                     targetCoordinate,
-                    (startTime - Time.time) * speed / distance
+                    (Time.time-startTime) * speed / distance
                     );
                 yield return null;
             }

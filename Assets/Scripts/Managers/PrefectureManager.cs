@@ -52,8 +52,8 @@ public class PrefectureManager : MonoBehaviour
                 HumanMoveManager.moveDataList.Add(
                     new MoveData()
                     {
-                        sourceCoordinate = ps.prefecture.coordinate,
-                        targetCoordinate = i.targetPrefecture.coordinate,
+                        sourceId = ps.prefecture.prefectureId,
+                        targetId = i.targetPrefecture.prefectureId,
                         population = people,
                     });
             }

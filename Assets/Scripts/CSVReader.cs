@@ -7,6 +7,7 @@ public class CSVReader
 {
     public List<string[]> itemCsvData { get; private set; } = new List<string[]>();
     public List<string[]> prefectureCsvData { get; private set; } = new List<string[]>();
+    public List<string[]> coordinateCsvData { get; private set; } = new List<string[]>();
     public void SetItemInfo()
     {
         Load("ItemInfo", itemCsvData);
@@ -14,6 +15,11 @@ public class CSVReader
     public void SetPrefectureInfo()
     {
         Load("PrefectureInfo", prefectureCsvData);
+    }
+    public void SetCoordinateInfo()
+    {
+        Load("CoordinateInfo", coordinateCsvData);
+
     }
     void Load(string fileName,List<string[]> list)
     {

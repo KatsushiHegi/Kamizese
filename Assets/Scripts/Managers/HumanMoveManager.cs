@@ -6,25 +6,36 @@ public class HumanMoveManager : MonoBehaviour
 {
     [SerializeField] GameObject HumanPref;
     [SerializeField] Transform Parent;
+    Vector2[] coordinateList = new Vector2[47];
     public List<MoveData> moveDataList { get; set; } = new List<MoveData>();
+    private void Start()
+    {
+        var csv = new CSVReader();
+        csv.SetCoordinateInfo();
+        for (int i = 0; i < csv.coordinateCsvData.Count; i++)
+        {
+            coordinateList[i] = new Vector2(int.Parse(csv.coordinateCsvData[i][0]), int.Parse(csv.coordinateCsvData[i][1]));
+        }
+    }
     public IEnumerator HumanMove()
     {
         int count = 0;
         int finishCount = 0;
         foreach (MoveData md in moveDataList)
         {
-            for (int i = 0; i < md.population; i+=10)
+            for (int i = 0; i < md.population; i+=500)
             {
                 var ins = Instantiate(HumanPref, Parent);
                 ins.GetComponent<HumanController>().Move(
-                    md.sourceCoordinate,
-                    md.targetCoordinate,
+                    coordinateList[md.sourceId],
+                    coordinateList[md.targetId],
                     () => { finishCount++; }
                     );
                 count++;
             }
+            Debug.Log("s" + coordinateList[md.sourceId] + "t" + coordinateList[md.targetId]);
         }
-        while (count == finishCount)
+        while (count != finishCount)
         {
             yield return null;
         }
@@ -33,7 +44,7 @@ public class HumanMoveManager : MonoBehaviour
 }
 public struct MoveData
 {
-    public Vector2 sourceCoordinate;
-    public Vector2 targetCoordinate;
+    public int sourceId;
+    public int targetId;
     public int population;
 }
