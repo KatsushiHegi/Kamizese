@@ -24,7 +24,7 @@ public class Shop : MonoBehaviour
                 PrefectureManager.GetPrefecture(int.Parse(CSVReader.itemCsvData[i][0])),
                 CSVReader.itemCsvData[i][1],
                 CSVReader.itemCsvData[i][2],
-                Random.Range(1,5)
+                Random.Range(1,6)
                 );
 
             
