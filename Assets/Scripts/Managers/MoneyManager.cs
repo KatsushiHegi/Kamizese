@@ -45,7 +45,7 @@ public class MoneyManager : MonoBehaviour
     }
     public int GetRewarded(int people, float distance)
     {
-        double standard = people * 0.01;
+        double standard = people * 0.005;
         double multiply = distance;
         int reward = (int)(standard * multiply);
         money += reward;
