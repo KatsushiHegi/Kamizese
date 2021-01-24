@@ -26,11 +26,4 @@ public class ItemController : MonoBehaviour
             Color.red;
 
     }
-    public void SetItem(Prefecture targetPrefecture, string name, string description)
-    {
-        item.targetPrefecture = targetPrefecture;
-        item.name = name;
-        item.description = description;
-    }
-    
 }
