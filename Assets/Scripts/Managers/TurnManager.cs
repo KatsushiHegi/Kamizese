@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] PopulationDisplayManager PopulationDisplayManager;
     [SerializeField] ConfirmPopUpManager ConfirmPopUpManager;
     [SerializeField] HumanMoveManager HumanMoveManager;
+    [SerializeField] AudioManager AudioManager;
     private void Start() => StartCoroutine(StartTurnThread());
     public void EndTurn() => StartCoroutine(EndTrunThread());
     public void SetText()
@@ -38,6 +40,8 @@ public class TurnManager : MonoBehaviour
         ConfirmPopUpManager.Set();
         SetText();
         MoneyManager.SetMoneyText();
+        if (turn == 1) StartCoroutine(AudioManager.PlayMainBgm());
+        else StartCoroutine(AudioManager.UnPauseMainBgm());
         yield return AnimationManager.PlayFadeIn();
     }
     IEnumerator EndTrunThread()
@@ -48,7 +52,11 @@ public class TurnManager : MonoBehaviour
             yield break;
         }
         PrefectureManager.UseItems();
+        StartCoroutine( AudioManager.PauseMainBgm());
+        if (turn == 1) StartCoroutine(AudioManager.PlayMoveBgm());
+        else StartCoroutine(AudioManager.UnPauseMoveBgm());
         yield return HumanMoveManager.HumanMove();
+        StartCoroutine(AudioManager.PauseMoveBgm());
         yield return AnimationManager.PlayFadeOut();
         turn++;
         StartCoroutine(StartTurnThread());

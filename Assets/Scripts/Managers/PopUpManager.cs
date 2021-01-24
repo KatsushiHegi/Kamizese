@@ -10,6 +10,7 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] GameObject TurnResultPop;
     [SerializeField] GameObject ResultPop;
     [SerializeField] GameObject RankingPop;
+    [SerializeField] GameObject WarningSkip;
     public void ActiveCostPop()
     {
         CostPop.SetActive(true);
@@ -26,9 +27,14 @@ public class PopUpManager : MonoBehaviour
     {
         RankingPop.SetActive(true);
     }
+    public void ActiveWarningSkipPop()
+    {
+        WarningSkip.SetActive(true);
+    }
+
     public void UnActive(GameObject g)
     {
         g.SetActive(false);
     }
-    public void ToTitle() => SceneManager.LoadScene("Title");
+
 }

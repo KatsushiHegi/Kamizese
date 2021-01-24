@@ -6,6 +6,7 @@ public class HumanMoveManager : MonoBehaviour
 {
     [SerializeField] GameObject HumanPref;
     [SerializeField] Transform Parent;
+    [SerializeField] GameObject Panel;
     Vector2[] coordinateList = new Vector2[47];
     public List<MoveData> moveDataList { get; set; } = new List<MoveData>();
     private void Start()
@@ -21,6 +22,7 @@ public class HumanMoveManager : MonoBehaviour
     {
         int count = 0;
         int finishCount = 0;
+        Panel.SetActive(true);
         foreach (MoveData md in moveDataList)
         {
             for (int i = 0; i < md.population; i+=500)
@@ -40,6 +42,7 @@ public class HumanMoveManager : MonoBehaviour
             yield return null;
         }
         moveDataList.Clear();
+        Panel.SetActive(false);
     }
 }
 public struct MoveData

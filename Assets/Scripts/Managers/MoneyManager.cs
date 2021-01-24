@@ -10,22 +10,20 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] PrefectureManager PrefectureManager;
     [SerializeField] Text MoneyText;
     [SerializeField] Text CostText;
-    [SerializeField] Text BalanceText;
     int cost = 0;
 
     public void SetMoneyText()
     {
-        MoneyText.text = money.ToString("N0");
+        MoneyText.text = money.ToString("N0") + "千円";
         SetCostBalanceText();
     }
     public void SetCostBalanceText()
     {
         CalcCost();
-        CostText.text = cost.ToString();
+        CostText.text = cost.ToString("N0") + "千円";
         int balance = money - cost;
-        if (balance < 0) BalanceText.color = Color.red;
-        else BalanceText.color = Color.black;
-        BalanceText.text = balance.ToString();
+        if (balance < 0) CostText.color = Color.red;
+        else CostText.color = Color.black;
     }
     void CalcCost()
     {

@@ -16,7 +16,7 @@ public class ItemController : MonoBehaviour
             item.targetPrefecture.prefectureName + "　" +
             item.name +
             "　魅力：" + item.attractiveness +
-            "　￥" + item.price;
+            "　" + item.price.ToString("N0") + "千円";
 
         GetComponent<Image>().color =
             item.attractiveness == 1 ? new Color(1,1,1) :

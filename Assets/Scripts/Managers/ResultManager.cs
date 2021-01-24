@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ResultManager : MonoBehaviour
 {
@@ -10,12 +12,16 @@ public class ResultManager : MonoBehaviour
     [SerializeField] SaveManager SaveManager;
     [SerializeField] ResultController ResultController;
     [SerializeField] RankingController RankingController;
+    [SerializeField] AudioManager AudioManager;
+    [SerializeField] AnimationManager AnimationManager;
     public int sumCost { get; set; } = 0;
     public double variance { get; private set; } = 0;
     public int score { get; private set; } = 0;
 
     public IEnumerator ResultThread()
     {
+        StartCoroutine(AudioManager.StopMainBgm());
+        StartCoroutine(AudioManager.PlayResultBgm());
         CalcVariance();
         CalcScore();
         PopUpManager.ActiveResultPop();
@@ -68,5 +74,19 @@ public class ResultManager : MonoBehaviour
         Debug.Log("score" + score);
         this.score = score;
         return score;
+    }
+    public void ToTitleOnClick()
+    {
+        StartCoroutine(col());
+        IEnumerator col()
+        {
+            int i = 0;
+            Action callback = () => i++;
+            Action cols = () => StartCoroutine(AnimationManager.PlayFadeOut(callback));
+            cols += () => StartCoroutine(AudioManager.StopResultBgm(callback));
+            cols.Invoke();
+            yield return new WaitUntil(() => i == cols.GetInvocationList().Length);
+            SceneManager.LoadScene("title");
+        }
     }
 }

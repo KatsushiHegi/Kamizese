@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +25,13 @@ public class AnimationManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         FadeAnim.gameObject.SetActive(false);
     }
-    public IEnumerator PlayFadeOut()
+    public IEnumerator PlayFadeOut(Action callback = null)
     {
         FadeAnim.gameObject.SetActive(true);
         FadeAnim.Play("FadeOut");
         yield return new WaitForSeconds(.5f);
         FadeAnim.gameObject.SetActive(false);
+        callback?.Invoke();
     }
 
     //ポップアップ
