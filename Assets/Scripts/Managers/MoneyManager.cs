@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
-    const int Initial = 2000;//初期金額
+    const int Initial = 3000;//初期金額
     public int money { get; private set; } = Initial;
     [SerializeField] PrefectureManager PrefectureManager;
     [SerializeField] Text MoneyText;
