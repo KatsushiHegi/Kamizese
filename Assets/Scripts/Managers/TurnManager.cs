@@ -27,7 +27,7 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator StartTurnThread()
     {
-        if (turn == 21) { 
+        if (turn == 11) { 
             StartCoroutine(ResultManager.ResultThread());
             yield break;
         }
@@ -65,9 +65,9 @@ public class TurnManager : MonoBehaviour
     IEnumerator Skip()
     {
         yield return AnimationManager.PlayFadeOut();
-        turn = 20;
+        turn = 10;
         SetText();
-        turn = 21;
+        turn = 11;
         StartCoroutine(StartTurnThread());
     }
 }
