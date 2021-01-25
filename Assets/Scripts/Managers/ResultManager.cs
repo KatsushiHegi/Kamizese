@@ -25,7 +25,7 @@ public class ResultManager : MonoBehaviour
         CalcVariance();
         CalcScore();
         PopUpManager.ActiveResultPop();
-        ResultController.SetResultText(sumCost, variance, score);
+        ResultController.SetResultText(sumCost, (1f - (variance / 117151573f)) * 100, score);
 
         yield break;
     }

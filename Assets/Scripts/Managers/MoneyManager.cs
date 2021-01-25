@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
-    const int Initial = 3000;//初期金額
+    const int Initial = 2000;//初期金額
     public int money { get; private set; } = Initial;
     [SerializeField] PrefectureManager PrefectureManager;
+    [SerializeField] ResultManager ResultManager;
     [SerializeField] Text MoneyText;
     [SerializeField] Text CostText;
     int cost = 0;
@@ -41,6 +42,7 @@ public class MoneyManager : MonoBehaviour
     {
         if (cost > money) return false;
         money -= cost;
+        ResultManager.sumCost += cost;
         return true;
     }
     public int GetRewarded(int people, float distance)

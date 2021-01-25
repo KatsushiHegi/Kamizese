@@ -12,7 +12,7 @@ public class ResultController : MonoBehaviour
     public void SetResultText(int sumCost,double variance, int score)
     {
         SumCostText.text = sumCost.ToString("N0");
-        VarianceText.text = variance.ToString("N2");
+        VarianceText.text = variance.ToString("N1")+"%";
         ScoreText.text = score.ToString("N0");
     }
 }

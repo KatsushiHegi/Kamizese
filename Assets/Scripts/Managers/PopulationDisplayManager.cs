@@ -30,6 +30,7 @@ public class PopulationDisplayManager : MonoBehaviour
         }
         QuickSort(sortedPrefectures, 0, sortedPrefectures.Length-1);
         Disp(prefectures);
+        status = Status.Normal;
     }
 
     private void Disp(Prefecture[] prefectures){
@@ -77,24 +78,26 @@ public class PopulationDisplayManager : MonoBehaviour
     }
 
     //クイックソート
-    private void QuickSort(Prefecture[] prefectures, int left, int right){
+    private void QuickSort(Prefecture[] prefectures, int left, int right)
+    {
 
-        if(left >= right) return;
+        if (left >= right) return;
 
         Prefecture pivot = Median(
-            prefectures[left], 
-            prefectures[(left + right)/2], 
+            prefectures[left],
+            prefectures[(left + right) / 2],
             prefectures[right]
         );
 
         int i = left;
         int j = right;
 
-        while(i <= j){
-            while(i < right && prefectures[i].population.CompareTo(pivot.population) > 0) i++;
-            while(j > left && prefectures[j].population.CompareTo(pivot.population) <= 0) j--;
+        while (i <= j)
+        {
+            while (i < right && prefectures[i].population.CompareTo(pivot.population) > 0) i++;
+            while (j > left && prefectures[j].population.CompareTo(pivot.population) < 0) j--;
 
-            if(i > j) break;
+            if (i >= j) break;
             Swap(ref prefectures[i], ref prefectures[j]);
 
             i++;
@@ -102,7 +105,7 @@ public class PopulationDisplayManager : MonoBehaviour
         }
 
         QuickSort(prefectures, left, i - 1);
-        QuickSort(prefectures, i, right);
+        QuickSort(prefectures, j + 1, right);
     }
 
     private Prefecture Median(Prefecture x, Prefecture y, Prefecture z){
