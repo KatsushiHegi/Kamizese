@@ -31,16 +31,12 @@ public class HumanMoveManager : MonoBehaviour
                 ins.GetComponent<HumanController>().Move(
                     coordinateList[md.sourceId],
                     coordinateList[md.targetId],
-                    () => { finishCount++; }
+                    () =>  finishCount++
                     );
                 count++;
             }
-            Debug.Log("s" + coordinateList[md.sourceId] + "t" + coordinateList[md.targetId]);
         }
-        while (count != finishCount)
-        {
-            yield return null;
-        }
+        yield return new WaitUntil(() => finishCount == count);
         moveDataList.Clear();
         Panel.SetActive(false);
     }
