@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ConfirmPopUpManager : MonoBehaviour
@@ -10,6 +7,9 @@ public class ConfirmPopUpManager : MonoBehaviour
     [SerializeField] Transform Parent;
     [SerializeField] Button RunButton;
     [SerializeField] PrefectureManager PrefectureManager;
+    /// <summary>
+    /// ConfirmPopUpを用意します
+    /// </summary>
     public void Set()
     {
         foreach (Transform child in Parent)

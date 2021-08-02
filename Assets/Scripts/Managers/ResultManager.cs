@@ -18,24 +18,33 @@ public class ResultManager : MonoBehaviour
     public double variance { get; private set; } = 0;
     public int score { get; private set; } = 0;
 
+    /// <summary>
+    /// リザルトのスレッドを実行します
+    /// </summary>
     public IEnumerator ResultThread()
     {
+        const float POIFULL = 117151573f;
         StartCoroutine(AudioManager.StopMainBgm());
         StartCoroutine(AudioManager.PlayResultBgm());
         CalcVariance();
         CalcScore();
         PopUpManager.ActiveResultPop();
-        ResultController.SetResultText(sumCost, (1f - (variance / 117151573f)) * 100, score);
+        ResultController.SetResultText(sumCost, (1f - (variance / POIFULL)) * 100, score);
 
         yield break;
     }
+    /// <summary>
+    /// ランキングを実行します
+    /// </summary>
     public void Ranking()
     {
         PopUpManager.ActiveRankingPop();
         RankingUpdate();
         RankingController.SetRanking(SaveManager.GameConfig.scoreList);
     }
-
+    /// <summary>
+    /// ランキングを更新します
+    /// </summary>
     void RankingUpdate()
     {
         SaveManager.LoadDataFromLocal();
@@ -69,12 +78,16 @@ public class ResultManager : MonoBehaviour
     }
     int CalcScore()
     {
+        const int POIFULL = 117151573;
         int score;
-        score = (int)(-variance + 117151573);
+        score = (int)(-variance + POIFULL);
         Debug.Log("score" + score);
         this.score = score;
         return score;
     }
+    /// <summary>
+    /// タイトルへ戻るをクリックしたときの処理を実行します
+    /// </summary>
     public void ToTitleOnClick()
     {
         StartCoroutine(col());

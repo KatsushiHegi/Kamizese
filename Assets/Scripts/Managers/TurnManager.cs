@@ -19,7 +19,13 @@ public class TurnManager : MonoBehaviour
     [SerializeField] HumanMoveManager HumanMoveManager;
     [SerializeField] AudioManager AudioManager;
     private void Start() => StartCoroutine(StartTurnThread());
+    /// <summary>
+    /// ターンを終える処理を実行します
+    /// </summary>
     public void EndTurn() => StartCoroutine(EndTrunThread());
+    /// <summary>
+    /// ターンのテキストを表示します
+    /// </summary>
     public void SetText()
     {
         TurnText.text = turn.ToString();
@@ -61,6 +67,9 @@ public class TurnManager : MonoBehaviour
         turn++;
         StartCoroutine(StartTurnThread());
     }
+    /// <summary>
+    /// スキップボタンをクリックしたときの処理を実行します
+    /// </summary>
     public void SkipButtonClick() => StartCoroutine(Skip());
     IEnumerator Skip()
     {

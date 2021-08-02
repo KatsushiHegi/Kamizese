@@ -29,10 +29,17 @@ public class PrefectureManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// 都道府県IDのPrefectureクラスを返します
+    /// </summary>
+    /// <param name="prefectureId">都道府県ID</param>
     public Prefecture GetPrefecture(int prefectureId)
     {
         return prefectureControllers[prefectureId].prefecture;
     }
+    /// <summary>
+    /// Itemを使用します
+    /// </summary>
     public void UseItems()
     {
         foreach (PrefectureController ps in prefectureControllers)
