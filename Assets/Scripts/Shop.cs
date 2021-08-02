@@ -12,6 +12,9 @@ public class Shop : MonoBehaviour
     {
         SetShop();
     }
+    /// <summary>
+    /// ショップを用意します
+    /// </summary>
     public void SetShop()
     {
         CSVReader CSVReader = new CSVReader();

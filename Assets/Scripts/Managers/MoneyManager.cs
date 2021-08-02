@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
@@ -13,11 +11,17 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] Text CostText;
     int cost = 0;
 
+    /// <summary>
+    /// 所持金テキストを表示します
+    /// </summary>
     public void SetMoneyText()
     {
         MoneyText.text = money.ToString("N0") + "千円";
         SetCostBalanceText();
     }
+    /// <summary>
+    /// コストテキストを表示します
+    /// </summary>
     public void SetCostBalanceText()
     {
         CalcCost();
@@ -38,6 +42,10 @@ public class MoneyManager : MonoBehaviour
         }
         cost = sum;
     }
+    /// <summary>
+    /// コストと所持金の清算処理をします
+    /// </summary>
+    /// <returns>完了できたらTRUEを返します</returns>
     public bool Liquidation()
     {
         if (cost > money) return false;
@@ -45,6 +53,12 @@ public class MoneyManager : MonoBehaviour
         ResultManager.sumCost += cost;
         return true;
     }
+    /// <summary>
+    /// 報酬金額を計算します
+    /// </summary>
+    /// <param name="people">移動人数</param>
+    /// <param name="distance">移動距離</param>
+    /// <returns>報酬金額を返します</returns>
     public int GetRewarded(int people, float distance)
     {
         double standard = people * 0.005;

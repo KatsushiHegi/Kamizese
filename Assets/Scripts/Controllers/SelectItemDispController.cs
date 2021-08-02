@@ -7,6 +7,9 @@ public class SelectItemDispController : MonoBehaviour
 {
     [SerializeField] Text NameText;
     [SerializeField] Text DescriptionText;
+    /// <summary>
+    /// Item選択画面を用意します
+    /// </summary>
     public void Set(Item item)
     {
         NameText.text = item.name;

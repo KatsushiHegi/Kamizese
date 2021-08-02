@@ -7,6 +7,7 @@ public class HumanMoveManager : MonoBehaviour
     [SerializeField] GameObject HumanPref;
     [SerializeField] Transform Parent;
     [SerializeField] GameObject Panel;
+    //47都道府県の座標
     Vector2[] coordinateList = new Vector2[47];
     public List<MoveData> moveDataList { get; set; } = new List<MoveData>();
     private void Start()
@@ -18,29 +19,29 @@ public class HumanMoveManager : MonoBehaviour
             coordinateList[i] = new Vector2(int.Parse(csv.coordinateCsvData[i][0]), int.Parse(csv.coordinateCsvData[i][1]));
         }
     }
+    /// <summary>
+    /// Humanオブジェクトを生成し移動を実行します
+    /// </summary>
     public IEnumerator HumanMove()
     {
+        const int humanRatio = 500;
         int count = 0;
         int finishCount = 0;
         Panel.SetActive(true);
         foreach (MoveData md in moveDataList)
         {
-            for (int i = 0; i < md.population; i+=500)
+            for (int i = 0; i < md.population; i += humanRatio)
             {
                 var ins = Instantiate(HumanPref, Parent);
                 ins.GetComponent<HumanController>().Move(
                     coordinateList[md.sourceId],
                     coordinateList[md.targetId],
-                    () => { finishCount++; }
+                    () => finishCount++
                     );
                 count++;
             }
-            Debug.Log("s" + coordinateList[md.sourceId] + "t" + coordinateList[md.targetId]);
         }
-        while (count != finishCount)
-        {
-            yield return null;
-        }
+        yield return new WaitUntil(() => finishCount == count);
         moveDataList.Clear();
         Panel.SetActive(false);
     }

@@ -13,6 +13,7 @@ public class SwichingDispManager : MonoBehaviour
     [SerializeField] GameObject[] RegionDisps = new GameObject[8];
     [SerializeField] ConfirmPopUpManager ConfirmPopUpManager;
     [SerializeField] MoneyManager MoneyManager;
+    [SerializeField] ItemPrefectureManager ItemPrefectureManager;
     GameObject currentDisp;
     private void Start()
     {
@@ -25,6 +26,9 @@ public class SwichingDispManager : MonoBehaviour
         Buttons[6].onClick.AddListener(() => ToArea(RegionDisps[6]));
         Buttons[7].onClick.AddListener(() => ToArea(RegionDisps[7]));
     }
+    /// <summary>
+    /// 日本列島画面に遷移する処理を実行します
+    /// </summary>
     public void ToNihonDisp()
     {
         Header.SetActive(false);
@@ -36,7 +40,12 @@ public class SwichingDispManager : MonoBehaviour
         NihonDisp.SetActive(true);
         ConfirmPopUpManager.Set();
         MoneyManager.SetCostBalanceText();
+        ItemPrefectureManager.ResetPickUpPrefecture();
     }
+    /// <summary>
+    /// 地方画面に遷移する処理を実行します
+    /// </summary>
+    /// <param name="areaDisp">地方画面</param>
     void ToArea(GameObject areaDisp)
     {
         Header.SetActive(false);

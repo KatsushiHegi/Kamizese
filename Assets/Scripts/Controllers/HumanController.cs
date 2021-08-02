@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HumanController : MonoBehaviour
 {
+    /// <summary>
+    /// HumanControllerがアタッチされているオブジェクトをターゲットの座標に移動させます
+    /// </summary>
+    /// <param name="coordinate">開始する座標</param>
+    /// <param name="targetCoordinate">目的の座標</param>
+    /// <param name="callback">コールバック関数</param>
     public void Move(Vector2 coordinate,Vector2 targetCoordinate, Action callback)
     {
         Set();

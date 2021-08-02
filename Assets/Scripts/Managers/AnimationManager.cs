@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
@@ -17,7 +16,9 @@ public class AnimationManager : MonoBehaviour
     //走りモーション
     [SerializeField] GameObject Human;
 
-    //フェード
+    /// <summary>
+    /// フェードインを再生します
+    /// </summary>
     public IEnumerator PlayFadeIn()
     {
         FadeAnim.gameObject.SetActive(true);
@@ -25,6 +26,9 @@ public class AnimationManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         FadeAnim.gameObject.SetActive(false);
     }
+    /// <summary>
+    /// フェードアウトを再生します
+    /// </summary>
     public IEnumerator PlayFadeOut(Action callback = null)
     {
         FadeAnim.gameObject.SetActive(true);
@@ -34,50 +38,10 @@ public class AnimationManager : MonoBehaviour
         callback?.Invoke();
     }
 
-    //ポップアップ
-    //プロジェクト
-    public void popProjectOn()
-    {
-        popProject.SetActive(true);
-    }
-    public IEnumerator popProjectOff(){
-        Animator animator = popProject.GetComponent<Animator>();
-        AudioSource audioSource = popProject.GetComponent<AudioSource>();
-        animator.SetBool("open",false);
-        audioSource.PlayOneShot(pop);
-        yield return new WaitForSeconds(.5f);
-        popProject.SetActive(false);
-    }
 
-    //リザルト
-    public void popResultOn()
-    {
-        popResult.SetActive(true);
-    }
-    public IEnumerator popResultOff(){
-        Animator animator = popResult.GetComponent<Animator>();
-        AudioSource audioSource = popResult.GetComponent<AudioSource>();
-        animator.SetBool("open",false);
-        audioSource.PlayOneShot(pop);
-        yield return new WaitForSeconds(.5f);
-        popResult.SetActive(false);
-    }
-
-    //ランキング
-    public void popRankingOn()
-    {
-        popRanking.SetActive(true);
-    }
-    public IEnumerator popRankingOff(){
-        Animator animator = popRanking.GetComponent<Animator>();
-        AudioSource audioSource = popRanking.GetComponent<AudioSource>();
-        animator.SetBool("open",false);
-        audioSource.PlayOneShot(pop);
-        yield return new WaitForSeconds(.5f);
-        popRanking.SetActive(false);
-    }
-
-    //走りモーション
+    /// <summary>
+    /// 走りモーションを実行します
+    /// </summary>
     public void HumanDash(bool State)
     {
         Animator animator = Human.GetComponent<Animator>();

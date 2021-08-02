@@ -23,6 +23,9 @@ public class PopulationDisplayManager : MonoBehaviour
         SortButton.onClick.AddListener(() => Change());
     }
 
+    /// <summary>
+    /// 人口を更新します
+    /// </summary>
     public void UpdatePopulation(){
         for(int i = 0 ; i < PrefectureManager.prefectureControllers.Length ; i++){
             prefectures[i] = PrefectureManager.prefectureControllers[i].prefecture;

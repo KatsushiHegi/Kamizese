@@ -8,6 +8,13 @@ public class Item
     public int attractiveness;  //魅力
     public Prefecture targetPrefecture; //対象都道府県
 
+    /// <summary>
+    /// Itemクラスの初期化を実行します
+    /// </summary>
+    /// <param name="targetPrefecture">ターゲットの都道府県</param>
+    /// <param name="name">Itemの名前</param>
+    /// <param name="description">Itemの説明</param>
+    /// <param name="attractiveness">Itemの魅力度</param>
     public void Set(Prefecture targetPrefecture, string name, string description, int attractiveness)
     {
         this.targetPrefecture = targetPrefecture;

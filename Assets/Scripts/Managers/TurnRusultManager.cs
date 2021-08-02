@@ -8,6 +8,9 @@ public class TurnRusultManager : MonoBehaviour
     public List<DispData> dispDataList { get; set; } = new List<DispData>();
     [SerializeField] GameObject TurnResultElementPref;
     [SerializeField] Transform parent;
+    /// <summary>
+    /// ターン事のリザルトを用意します
+    /// </summary>
     public void Set()
     {
         foreach (Transform child in parent)
